@@ -31,12 +31,20 @@ class account extends Controller{
 
 		if(isset($_POST['submit']))
 		{
+			$vendors = '';
+			// die();
 			if(empty($this->roles[$_POST["role"]]))
 			{
 				$_POST["role"] = 21;
 			}
 			$_POST['password'] = $password;
-			$this->users->setUser($_POST);
+			if(!empty($_POST['vendors'])){
+				for($i=0;$i<count($_POST['vendors']);$i++){
+					$vendors .= ",".$_POST['vendors'][$i];
+				}
+				$vendors = trim($vendors, ",");
+			}
+			$this->users->setUser($_POST, $vendors);
 		}
 
 		$users = $this->users->getUsers();

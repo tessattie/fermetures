@@ -7,6 +7,7 @@ jQuery(function($){
             closeOnClick: false
         });
 
+
 	$("#limitedVendor").click(function(){ 
 		var regex = /[0-9]/;
 		var vendor = prompt('Enter the vendor Number : ');
@@ -23,6 +24,14 @@ jQuery(function($){
 			alert("There are no vendor numbers with more than six digits. Try again.");
 		}
 	});
+
+	$(".copyToInput").click(function(){
+		value = $(this).parent().text().replace(",", "");
+		value = value.replace("$","");
+		value = value.replace(" ","");
+		// alert(value);
+		$(this).parent().parent().find(".inputLocation .isNumeric").val($.trim(value.replace(" ","")));
+	})
 
 	$("#section").click(function(){ 
 		var regex = /[0-9]/;
@@ -501,26 +510,23 @@ jQuery(function($){
 		}
 	})
 
-	$('#keywordInput').change(function(){
-		var keyword = $(this).val();
-		$.ajax({
-	       url : '/csm/public/home/setKeyword',
-	       type : 'POST',
-	       data : {key : keyword},
-	       dataType : 'html',
-	       success : function(data, statut){
-	           console.log(data) // On passe code_html à jQuery() qui va nous créer l'arbre DOM !
-	       },
 
-	       error : function(resultat, statut, erreur){
-	         
-	       },
+	$("#showall").change(function(){
+		if($(this).is(':checked')){
+			$('.tohide').css('display', 'table-row');
+		}else{
+			$('.tohide').css('display', 'none');
+		}
+	})
 
-	       complete : function(resultat, statut){
-
-	       }
-
-	    });
+	$(".isNumeric").change(function(){
+		var value = $(this).val().replace(",",".");
+		value = value.replace(" ","");
+		if($.isNumeric(value)){
+				$(this).val(value);
+		}else{
+			$(this).val("");
+		}
 	})
 
 

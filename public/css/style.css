@@ -171,7 +171,7 @@ caption
 tbody td
 {
 	text-align: center;
-	font-size: 9px;
+	font-size: 12px;
 	font-weight: bold;
 }
 .ItemDescription, .tpr, .CaseCost, .Retail, .CertCode
@@ -402,6 +402,9 @@ a:hover, a:visited, a:link, a:active
 	padding:10px;
 	font-weight: bold;
 }
+.tohide{
+	display:none;
+}
 #backtop
 {
 	bottom:25px;
@@ -432,7 +435,7 @@ a:hover, a:visited, a:link, a:active
 .table-bordered > thead > tr > th
 {
 	text-align: center;
-	font-size: 10px;
+	font-size: 13px;
 }
 .table
 {
@@ -455,7 +458,7 @@ th > .form-control
 }
 .form-control
 {
-	height:28px;
+	height:25px;
 	font-size: 10px;
 }
 form > .btn

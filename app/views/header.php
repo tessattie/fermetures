@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="/caisses/public/bootstrap/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="/caisses/public/css/style.css">
 	<link rel="stylesheet" href="/caisses/public/css/BootSideMenu.css">
+    <link rel="stylesheet" href="/caisses/public/css/BootSideMenu.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<style type="text/css">

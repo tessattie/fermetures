@@ -38,7 +38,7 @@ class users{
 		return $result->fetch(PDO::FETCH_BOTH);
 	}
 
-	public function setUser($user)
+	public function setUser($user, $vendors)
 	{
 		$insert = $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, email, role, vendors)
 	    VALUES (:firstname, :lastname, :username, :password, :email, :role, :vendors)");
@@ -49,7 +49,7 @@ class users{
 	    $insert->bindParam(':password', $user['password']);
 	    $insert->bindParam(':email', $user['email']);
 	    $insert->bindParam(':role', $user['role']);
-	    $insert->bindParam(':vendors', $user['vendors']);
+	    $insert->bindParam(':vendors', $vendors);
 
 	    $insert->execute();
 	}

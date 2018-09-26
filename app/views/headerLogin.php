@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CARIBBEAN - REPORTS</title>
+	<title>CARIBBEAN - CAISSES</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/caisses/public/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/caisses/public/bootstrap/css/bootstrap.css">

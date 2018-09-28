@@ -19,7 +19,7 @@
 <?php if(!empty($data['report'])) : ?>
 	<table class="table table-bordered table-hover table-striped" style = "background:white">
 		<thead>
-		<tr><th colspan="6" style="text-align:left;vertical-align:middle">[ PERIOD : Daily ] - [ CASHIER : #<?= $data['report'][0]['F1126'] . " - " . $data['report'][0]['F1127'] ?> ] - 
+		<tr><th colspan="6" style="text-align:left;vertical-align:middle">[ DETAILED REPORT ] - [ CASHIER : #<?= $data['report'][0]['F1126'] . " - " . $data['report'][0]['F1127'] ?> ] - 
 		[ SALES DATE : <?= date("F d Y" , strtotime($_COOKIE['date'])) ?> ] - [ TODAY - <?= date("F d Y") ?> ]</th></tr>
 			<tr>
 			<th style="width:5%"></th>
@@ -88,7 +88,7 @@
 								<input type="hidden" value="<?= $r['F64'] ?>" name="quantity[]"> </td>
 
 								<?php if($r['F1034'] == '1201') : ?>
-									<td style="width:10%">$<?= ($r['F65'] == ".00") ? "-" : number_format((float)$r['F65'] + (float)$cashinput, 2, ".", ","); ?> 
+									<td style="width:10%">$<?= ($r['F65'] == ".00") ? "-" : number_format((float)$r['F65'], 2, ".", ","); ?> 
 								<input type="hidden" value="<?= $r['F65'] + $cashinput ?>" name="amount[]"> 
 								<span class = "glyphicon glyphicon-arrow-right copyToInput" style="padding:5px;color:white;background:#f0ad4e;border-radius:3px;float:right;cursor:pointer"></span></td>
 								<?php else : ?>
@@ -116,7 +116,7 @@
 								<input type="hidden" value="<?= $r['F64'] ?>" name="quantity[]"> </td>
 
 								<?php if($r['F1034'] == '1201') : ?>
-									<td style="width:10%">$<?= ($r['F65'] == ".00") ? "-" : number_format((float)$r['F65'] + (float)$cashinput, 2, ".", ","); ?> 
+									<td style="width:10%">$<?= ($r['F65'] == ".00") ? "-" : number_format((float)$r['F65'], 2, ".", ","); ?> 
 								<input type="hidden" value="<?= $r['F65'] + $cashinput ?>" name="amount[]"> 
 								<span class = "glyphicon glyphicon-arrow-right copyToInput" style="padding:5px;color:white;background:#f0ad4e;border-radius:3px;float:right;cursor:pointer"></span></td>
 								<?php else : ?>
@@ -141,7 +141,7 @@
 					<?php if($count == 1 && $data['report'][0]['F1034'] == 3199) : ?>
 						<tr><th colspan="6" style="text-align:center;font-style:italic">this user logged in but did not make any transactions. No edits are needed.</th></tr>
 					<?php 	endif; ?>
-					<tr><th colspan="4" style="text-align:right">TOTAL</th> <th class="text-center"><label class="label label-primary" style="font-size:14px;padding: .4em .6em .3em;">$<?= number_format($total+$cashinput,2,".",",") ?></label></th>
+					<tr><th colspan="4" style="text-align:right">TOTAL</th> <th class="text-center"><label class="label label-primary" style="font-size:14px;padding: .4em .6em .3em;">$<?= number_format($total,2,".",",") ?></label></th>
 					<th class="text-center"><label class="label label-info" style="font-size:14px;padding: .4em .6em .3em;">$<?= number_format($real_total,2,".",",") ?></label></th></tr>
 				</form>
 			</tbody>

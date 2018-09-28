@@ -40,9 +40,7 @@
 					<?php endif; ?>
 						<?php $real_total=0;$total=0; ?>
 						<tr><th colspan="7">#<?= $rp['cashier_id'] . " - " . $rp['cashier_name'] ?></th></tr>
-						<tr><td>1200</td><td class="text-left">Initial Cash Input</td><td></td><td>	
-						</td><td>$<?= number_format($rp['initial_charge'], 2, ".", ",") ?>	</td><td></td><td></td></tr>
-						<?php $total = $total + $rp['initial_charge'] ?>
+						<?php $total = $total ?>
 					<?php endif; ?>
 					<tr>
 						<td><?= $rp['sale_id'] ?></td>
@@ -57,7 +55,7 @@
 						
 						<td> $<?= number_format($rp['real_amount'], 2, ".", ",") ?></td>
 						<?php if($rp['sale_id'] == '1201') : ?>
-							<td> $<?= number_format(($rp['real_amount'] - $rp['amount'] - $rp['initial_charge']), 2, ".", ",") ?></td>
+							<td> $<?= number_format(($rp['real_amount'] - $rp['amount']), 2, ".", ",") ?></td>
 						<?php else: ?>
 							<td> $<?= number_format(($rp['real_amount'] - $rp['amount']), 2, ".", ",") ?></td>
 						<?php endif; ?>
@@ -70,6 +68,8 @@
 						$total=$total + $rp['amount'];
 					?>
 					<?php $csh = $rp['cashier_id']; $p = $p + 1; ?>
+
+					
 				<?php endforeach; ?>
 				<?php $dailytotal = $dailytotal + $total; ?>
 							<?php $dailyrealtotal = $dailyrealtotal + $real_total; ?>

@@ -82,8 +82,8 @@ class home extends Controller{
 	public function globalReport(){
 		$cashiers = $this->logidb->getCashiers();
 		if(!empty($_COOKIE["date"])){
-			$from = $_COOKIE["date"] . " 00:00:00.000";
-			$to = $_COOKIE["date"] . " 29:59:59.999";
+			$from = "2018-09-27 00:00:00.000";
+			$to = "2018-09-27 29:59:59.999";
 			$m = 0;
 			foreach($cashiers as $cs){
 				$report = $this->logidb->getReport($from, $to, "D", $cs['ident']);
@@ -108,6 +108,35 @@ class home extends Controller{
 		$this->view('home/report', $data);
 	}
 
+	public function globalTotalReport(){
+		$cashiers = $this->logidb->getCashiers();
+		if(!empty($_COOKIE["date"])){
+			$from = $_COOKIE["date"] . " 00:00:00.000";
+			$to = $_COOKIE["date"] . " 29:59:59.999";
+			$m = 0;
+			foreach($cashiers as $cs){
+				$report = $this->logidb->getReport($from, $to, "D", $cs['ident']);
+				if(!empty($report)){
+					$saved_report = $this->lboss->getReport($cs['ident'], $from);
+					if(!empty($saved_report)){
+						$status = 1;
+					}else{
+						$status = 2;
+					}
+				}else{
+					$status = 0;
+				}
+				$statuses[$m] = array("cashier_id" => $cs['ident'], 'cashier_name' => $cs['username'], 'status' => $status);
+				$m = $m +1;
+			}
+		}
+		$date = $_COOKIE["date"] . " 00:00:00.000";
+		$reports = $this->lboss->getReports($date, $_SESSION["report_type"]);
+
+		$data = array('reports' => $reports, 'cashiers' => $cashiers, "statuses" => $statuses);
+		$this->view('home/totals', $data);
+	}
+
 	public function report(){
 		if(!empty($_POST['submit'])){
 			// var_dump($_POST);
@@ -115,6 +144,7 @@ class home extends Controller{
 			if($_POST['action'] == 2){
 				$_SESSION["date"] = $_POST['timestamp'];
 				$_SESSION["report_type"] = $_POST['report_type'];
+				$_COOKIE["date"] = $_POST['timestamp'];
 				// var_dump($_SESSION['report_type']);
 				header("Location:/caisses/public/export/excel");
 				
@@ -127,6 +157,14 @@ class home extends Controller{
 				
 			}
 
+		}
+	}
+
+	public function totals(){
+		if(!empty($_POST['submit'])){
+			$_SESSION["report_type"] = $_POST['report_type'];
+			$_COOKIE["date"] = $_POST['timestamp'];
+			header("Location:/caisses/public/home/globalTotalReport");
 		}
 	}
 

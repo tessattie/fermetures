@@ -31,6 +31,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
       <?php if($_SESSION['caisses']['role'] == "20") : ?>
+        <li class="dropdown">
+          <a href="#" class="navrightmenu" data-toggle="modal" data-target="#totalsModal">Totals</a>
+        </li>
       <li class="dropdown">
           <a href="#" class="navrightmenu" data-toggle="modal" data-target="#exampleModal">Report</a>
         </li>
@@ -88,6 +91,39 @@
               <option value = "">-- Choose --</option>
               <option value = "1">Show</option>
               <option value = "2">Export</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-bottom:0px">
+        Close</button>
+        <input type="submit" name="submit" class="btn btn-primary" value = "Submit">
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="totalsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+  <form action="/caisses/public/home/totals" method="POST">
+    <div class="modal-content" style="border:1px solid white;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Totals</h3>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Date</label>
+            <input required type="date" class="form-control" value="<?= date("Y-m-d") ?>" style="font-size:13px;height:32px" name="timestamp">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Period</label>
+            <select class="form-control" style="font-size:13px;height:32px" name="report_type" required>
+              <option value = "">-- Choose --</option>
+              <option value = "2">Midi</option>
+              <option value = "1">Soir</option>
             </select>
           </div>
       </div>

@@ -51,7 +51,7 @@
 						<?php endif; ?>
 					</td>
 					<td>-</td></tr>
-					<?php $count=0; $real_total = 0; $total=$cashinput; foreach($data['report'] as $r) : ?>
+					<?php $count=0; $real_total = 0; $total=$cashinput;$condition=false; foreach($data['report'] as $r) : ?>
 					<?php 	$count = $count+ 1 ?>
 						<?php if($r['F1034'] >= 1201 && $r['F1034'] <= 1296) : ?>
 						<?php  

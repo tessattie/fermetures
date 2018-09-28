@@ -22,15 +22,14 @@ class home extends Controller{
 	{
 		parent::__construct();
 		$this->today = date('Y-m-d', strtotime("-1 days"));
-		if(!isset($_COOKIE["date"]))
+		if(!isset($_SESSION["date"]))
 		{
 			setCookie("date", date('Y-m-d'));
-			$_COOKIE["date"] = date('Y-m-d');
 			$_SESSION["date"] = date('Y-m-d');
 		}
 		else
 		{
-			$this->date = $_COOKIE["date"];
+			$this->date = $_SESSION["date"];
 		}
 		$this->classname = "thereport";
 		if(empty($_SESSION['caisses']['cashier'])){
@@ -48,7 +47,7 @@ class home extends Controller{
 		$report = array();
 		$statuses = array();
 		$cashiers = $this->logidb->getCashiers();
-		if(!empty($_COOKIE["date"])){
+		if(!empty($_SESSION["date"])){
 			$from = $_SESSION["date"] . " 00:00:00.000";
 			$to = $_SESSION["date"] . " 29:59:59.999";
 			$m = 0;
@@ -110,9 +109,9 @@ class home extends Controller{
 
 	public function globalTotalReport(){
 		$cashiers = $this->logidb->getCashiers();
-		if(!empty($_COOKIE["date"])){
-			$from = $_COOKIE["date"] . " 00:00:00.000";
-			$to = $_COOKIE["date"] . " 29:59:59.999";
+		if(!empty($_SESSION["date"])){
+			$from = $_SESSION["date"] . " 00:00:00.000";
+			$to = $_SESSION["date"] . " 29:59:59.999";
 			$m = 0;
 			foreach($cashiers as $cs){
 				$report = $this->logidb->getReport($from, $to, "D", $cs['ident']);
@@ -130,7 +129,7 @@ class home extends Controller{
 				$m = $m +1;
 			}
 		}
-		$date = $_COOKIE["date"] . " 00:00:00.000";
+		$date = $_SESSION["date"] . " 00:00:00.000";
 		$reports = $this->lboss->getReports($date, $_SESSION["report_type"]);
 
 		$data = array('reports' => $reports, 'cashiers' => $cashiers, "statuses" => $statuses);
@@ -151,7 +150,6 @@ class home extends Controller{
 
 			if($_POST['action'] == 1){
 				$_SESSION["report_type"] = $_POST['report_type'];
-				$_COOKIE["date"] = $_POST['timestamp'];
 				$_SESSION["date"] = $_POST['timestamp'];
 				$_SESSION["report_type"] = $_POST['report_type'];
 				header("Location:/caisses/public/home/globalReport");
@@ -164,7 +162,7 @@ class home extends Controller{
 	public function totals(){
 		if(!empty($_POST['submit'])){
 			$_SESSION["report_type"] = $_POST['report_type'];
-			$_COOKIE["date"] = $_POST['timestamp'];
+			$_SESSION["date"] = $_POST['timestamp'];
 			header("Location:/caisses/public/home/globalTotalReport");
 		}
 	}
@@ -172,7 +170,7 @@ class home extends Controller{
 	public function saveReport(){
 		if(!empty($_POST['submit'])){
 
-			$date = $_COOKIE["date"] . " 00:00:00.000";
+			$date = $_SESSION["date"] . " 00:00:00.000";
 			if(!empty($_POST['report_id'])){
 				for($j=0;$j<count($_POST["sale_id"]);$j++){
 					if(!empty($_POST["item_id"][$j])){
@@ -212,18 +210,15 @@ class home extends Controller{
 		if(!empty($_POST['date']))
 		{
 			setCookie("date", $_POST['date']);
-			$_COOKIE["date"] = $_POST['date'];
 			$_SESSION["date"] = $_POST['date'];
 		}
 
 		if(!empty($_POST['cashier']))
 		{
 			setCookie("cashier", $_POST['cashier']);
-			$_COOKIE["cashier"] = $_POST['cashier'];
 			$_SESSION["cashier"] = $_POST['cashier'];
 		}else{
 			setCookie("cashier", "");
-			$_COOKIE["cashier"] = "";
 			$_SESSION["cashier"] = "";
 		}
 		header("Location:/caisses/public/home");
@@ -264,9 +259,9 @@ class home extends Controller{
 	public function setDefaultDates($from, $to)
 	{
 		setCookie("from", $from);
-		$_COOKIE["from"] = $from;
+		$_SESSION["from"] = $from;
 		setCookie("to", $to);
-		$_COOKIE["to"] = $to;
+		$_SESSION["to"] = $to;
 		if(!empty($from))
 		{
 			$this->from = $from;

@@ -24,6 +24,7 @@
 						    <option value="1293">Drwr Check UB G</option>
 						    <option value="1295">Drwr Credit Card G</option>
 						    <option value="1296">Drwr Credit Card US</option>
+						    <option value="124">Gift Card</option>
 						</select>
 					</th>
 					<th><input type='submit' class="btn btn-default" value='Submit' name="submit"></th>

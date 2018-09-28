@@ -18,11 +18,11 @@
         <option value="">-- Choose option --</option>
         <?php foreach($data['statuses'] as $st) : ?>
           <?php if($st['status'] != 0): ?>
-          <option value="<?= $st['cashier_id'] ?>" <?= (!empty($_COOKIE['cashier']) && $_COOKIE['cashier'] == $st['cashier_id'] ? "selected" : "") ?> ><?= $st['cashier_id'] . " - " .  $st['cashier_name'] ?></option>
+          <option value="<?= $st['cashier_id'] ?>" <?= (!empty($_SESSION['cashier']) && $_SESSION['cashier'] == $st['cashier_id'] ? "selected" : "") ?> ><?= $st['cashier_id'] . " - " .  $st['cashier_name'] ?></option>
           <?php endif; ?>
         <?php endforeach; ?>
       </select>
-      <input class="form-control mr-sm-2" name="date"  type="date" placeholder="Date" id='dateInput' style="margin-top:20px;float:right;margin-right:5px" value = "<?= $_COOKIE["date"] ?>">
+      <input class="form-control mr-sm-2" name="date"  type="date" placeholder="Date" id='dateInput' style="margin-top:20px;float:right;margin-right:5px" value = "<?= $_SESSION["date"] ?>">
     </form>
       <?php  
         $list = array(0 => "info", 1 => "success", 2 => "warning");

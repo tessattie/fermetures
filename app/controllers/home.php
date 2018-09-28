@@ -49,8 +49,8 @@ class home extends Controller{
 		$statuses = array();
 		$cashiers = $this->logidb->getCashiers();
 		if(!empty($_COOKIE["date"])){
-			$from = $_COOKIE["date"] . " 00:00:00.000";
-			$to = $_COOKIE["date"] . " 29:59:59.999";
+			$from = $_SESSION["date"] . " 00:00:00.000";
+			$to = $_SESSION["date"] . " 29:59:59.999";
 			$m = 0;
 			foreach($cashiers as $cs){
 				$report = $this->logidb->getReport($from, $to, "D", $cs['ident']);
@@ -81,9 +81,9 @@ class home extends Controller{
 
 	public function globalReport(){
 		$cashiers = $this->logidb->getCashiers();
-		if(!empty($_COOKIE["date"])){
-			$from = "2018-09-27 00:00:00.000";
-			$to = "2018-09-27 29:59:59.999";
+		if(!empty($_SESSION["date"])){
+			$from = $_SESSION["date"]." 00:00:00.000";
+			$to = $_SESSION["date"]." 29:59:59.999";
 			$m = 0;
 			foreach($cashiers as $cs){
 				$report = $this->logidb->getReport($from, $to, "D", $cs['ident']);
@@ -101,7 +101,7 @@ class home extends Controller{
 				$m = $m +1;
 			}
 		}
-		$date = $_COOKIE["date"] . " 00:00:00.000";
+		$date = $_SESSION["date"] . " 00:00:00.000";
 		$reports = $this->lboss->getReports($date, $_SESSION["report_type"]);
 
 		$data = array('reports' => $reports, 'cashiers' => $cashiers, "statuses" => $statuses);
@@ -144,7 +144,6 @@ class home extends Controller{
 			if($_POST['action'] == 2){
 				$_SESSION["date"] = $_POST['timestamp'];
 				$_SESSION["report_type"] = $_POST['report_type'];
-				$_COOKIE["date"] = $_POST['timestamp'];
 				// var_dump($_SESSION['report_type']);
 				header("Location:/caisses/public/export/excel");
 				
@@ -153,6 +152,8 @@ class home extends Controller{
 			if($_POST['action'] == 1){
 				$_SESSION["report_type"] = $_POST['report_type'];
 				$_COOKIE["date"] = $_POST['timestamp'];
+				$_SESSION["date"] = $_POST['timestamp'];
+				$_SESSION["report_type"] = $_POST['report_type'];
 				header("Location:/caisses/public/home/globalReport");
 				
 			}

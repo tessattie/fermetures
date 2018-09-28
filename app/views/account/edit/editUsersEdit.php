@@ -1,5 +1,7 @@
 <?php  
 	$roles = array(20 => "Admin", 21 => "User");
+
+	$allowed = explode(",", $data['user']['vendors']); 
 ?>
 <table class="table table-bordered">
 	<thead>
@@ -16,7 +18,20 @@
 						<option value = "21" <?= ($data['user']['role'] == 21) ? "selected" : "" ?>>User</option>
 					</select>
 				</th>
-				<th><input type="text" class="form-control" name="vendors" placeholder="Vendors" value = <?= $data['user']['vendors'] ?>></th>
+				<th>
+					<select class="mdb-select md-form colorful-select dropdown-primary form-control" name="vendors[]" style="height:80px" multiple searchable="Search here..">
+					    <option value="" disabled selected>-- ALL --</option>
+					    <option value="1200" <?= (in_array("1200", $allowed)) ? "selected" : "" ?>>Initial Charge</option>
+					    <option value="1201" <?= (in_array("1201", $allowed)) ? "selected" : "" ?>>Drwr Cash</option>
+					    <option value="1205" <?= (in_array("1205", $allowed)) ? "selected" : "" ?>>Drwr Cash US</option>
+					    <option value="1206" <?= (in_array("1206", $allowed)) ? "selected" : "" ?>>Drwr Charge</option>
+					    <option value="1294" <?= (in_array("1294", $allowed)) ? "selected" : "" ?>>Drwr Check UB US</option>
+					    <option value="1293" <?= (in_array("1293", $allowed)) ? "selected" : "" ?>>Drwr Check UB G</option>
+					    <option value="1295" <?= (in_array("1295", $allowed)) ? "selected" : "" ?>>Drwr Credit Card G</option>
+					    <option value="1296" <?= (in_array("1296", $allowed)) ? "selected" : "" ?>>Drwr Credit Card US</option>
+					    <option value="1217" <?= (in_array("1217", $allowed)) ? "selected" : "" ?>>Gift Certificate</option>
+					</select>
+				</th>
 				<th><input type='submit' class="btn btn-default" value='Submit' name="submit"></th>
 			</tr>
 		</form>

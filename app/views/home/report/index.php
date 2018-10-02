@@ -14,7 +14,7 @@
 	<div class="col-md-12">
 		<table class="table table-bordered table-hover table-striped" style = "background:white">
 			<thead>
-			<tr><th colspan="7" style="text-align:left;vertical-align:middle">[ PERIOD : Daily ] - 
+			<tr><th colspan="8" style="text-align:left;vertical-align:middle">[ PERIOD : Daily ] - 
 			[ SALES DATE : <?= date("F d Y" , strtotime($_COOKIE['date'])) ?> ] - [ TODAY - <?= date("F d Y") ?> ]</th></tr>
 				<tr>
 				<th style="width:5%"></th>
@@ -23,7 +23,7 @@
 					<th style="width:10%">QUANTITY</th>
 					<th style="width:10%">AMOUNT</th>
 					<th  style="width:10%">REAL AMOUNT</th>
-					<th  style="width:10%">BALANCE</th>
+					<th colspan="2"  style="width:10%">BALANCE</th>
 
 				</tr>
 			</thead>
@@ -36,10 +36,10 @@
 						<tr><th colspan="4" style="text-align:right">SUBTOTAL</th><th class="text-center"><label class="label label-primary" style="font-size:12px">$<?= number_format($total, 2, ".", ",") ?></label></th>
 						
 						<th  class="text-center"><label class="label label-info" style="font-size:12px">$<?= number_format($real_total, 2, ".", ",") ?></label></th>
-						<th  class="text-center"><label class="label label-info" style="font-size:12px">$<?= number_format(($real_total-$total), 2, ".", ",") ?></label></th></tr>
+						<th  class="text-center"><label class="label label-info" style="font-size:12px">$<?= number_format(($real_total-$total), 2, ".", ",") ?></label></th><th></th></tr>
 					<?php endif; ?>
 						<?php $real_total=0;$total=0; ?>
-						<tr><th colspan="7">#<?= $rp['cashier_id'] . " - " . $rp['cashier_name'] ?></th></tr>
+						<tr><th colspan="8">#<?= $rp['cashier_id'] . " - " . $rp['cashier_name'] ?></th></tr>
 						<?php $total = $total ?>
 					<?php endif; ?>
 					<tr>
@@ -77,14 +77,14 @@
 				<tr><th colspan="4" style="text-align:right">SUBTOTAL</th>
 				<th class="text-center"><label class="label label-primary" style="font-size:12px">$<?= number_format($total, 2, ".", ",") ?></label></th>
 				<th  class="text-center"><label class="label label-info" style="font-size:12px">$<?= number_format($real_total, 2, ".", ",") ?></label></th>
-				<th  class="text-center"><label class="label label-info" style="font-size:12px">$<?= number_format($real_total-$total, 2, ".", ",") ?></label></th></tr>
+				<th  class="text-center"><label class="label label-info" style="font-size:12px">$<?= number_format($real_total-$total, 2, ".", ",") ?></label></th><th></th></tr>
 			</tbody>
 
 			<tfoot>	
 				<tr><th colspan="4" style="text-align:right;background-color:#6e0000;color:white">TOTAL</th>
 				<th class="text-center" style="background-color:#6e0000;color:white">$<?= number_format($dailytotal, 2, ".", ",") ?></th>
 				<th style="background-color:#6e0000;color:white" class="text-center">$<?= number_format($dailyrealtotal, 2, ".", ",") ?></th>
-				<th style="background-color:#6e0000;color:white" class="text-center">$<?= number_format($dailyrealtotal-$dailytotal, 2, ".", ",") ?></th></tr>
+				<th style="background-color:#6e0000;color:white" class="text-center">$<?= number_format($dailyrealtotal-$dailytotal, 2, ".", ",") ?></th><th style="background-color:#6e0000;color:white" ></th></tr>
 			</tfoot>
 		</table>
 	</div>

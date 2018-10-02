@@ -78,6 +78,11 @@ class home extends Controller{
 		$this->view('home', $data);
 	}
 
+	public function deleteItem($id){
+		$saved_report = $this->lboss->deleteItem($id);
+		header("Location:/caisses/public/home/globalReport");
+	}
+
 	public function globalReport(){
 		$cashiers = $this->logidb->getCashiers();
 		if(!empty($_SESSION["date"])){
@@ -172,6 +177,8 @@ class home extends Controller{
 
 			$date = $_SESSION["date"] . " 00:00:00.000";
 			if(!empty($_POST['report_id'])){
+				// var_dump($_POST);
+				// die();
 				for($j=0;$j<count($_POST["sale_id"]);$j++){
 					if(!empty($_POST["item_id"][$j])){
 						$item = $this->lboss->getItem($_POST["item_id"][$j]);

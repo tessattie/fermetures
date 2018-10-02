@@ -53,13 +53,14 @@
 							<td> $<?= number_format($rp['amount'], 2, ".", ",") ?></td>
 						<?php endif; ?>
 						
-						<td> $<?= number_format($rp['real_amount'], 2, ".", ",") ?></td>
+						<td>$<?= number_format($rp['real_amount'], 2, ".", ",") ?></td>
 						<?php if($rp['sale_id'] == '1201') : ?>
 							<td> $<?= number_format(($rp['real_amount'] - $rp['amount']), 2, ".", ",") ?></td>
 						<?php else: ?>
 							<td> $<?= number_format(($rp['real_amount'] - $rp['amount']), 2, ".", ",") ?></td>
 						<?php endif; ?>
-						
+						<td><a href="/caisses/public/home/deleteItem/<?= $rp['id'] ?>"><span class="glyphicon glyphicon-trash" style="color:red;cursor:pointer;font-size:14px" 
+						onclick="return confirm('Are you sure you would like to delete [ <?= trim($rp['sale_name']) ?> ] for the cashier [ #<?= $rp['cashier_id'] . " - " . trim($rp['cashier_name'])?> ] ?')"></span></a></td>
 					</tr>
 					
 					

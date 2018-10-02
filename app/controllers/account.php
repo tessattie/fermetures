@@ -87,6 +87,7 @@ class account extends Controller{
 		$users = $this->users->getUsers();
 		$user = $this->users->getUserById($id);
 		$this->view('account/edit', array("user" => $user, "users" => $users, "error" => $errormessage, "menu" => $this->userRole, "exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to));
+	
 	}
 
 	public function reset($userId)

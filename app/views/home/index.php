@@ -97,10 +97,19 @@
 								<span class = "glyphicon glyphicon-arrow-right copyToInput" style="padding:5px;color:white;background:#f0ad4e;border-radius:3px;float:right;cursor:pointer"></span></td>
 								<?php endif; ?>
 								<td style="width:10%;" class = "inputLocation">
+								<?php if($value == ''){
+										$value = 0;
+									} 
+								?>
+								<?php if($value) : ?>
 									<input type="text" class= "form-control isNumeric" placeholder = "0" style="width:100%;margin:auto;text-align:center;font-size:12px" name="real_amount[]" value = "<?= number_format($value,2,".","") ?>" >							
-									<?php if($item_id != null) : ?>
+								<?php else : ?>
+									<input type="text" class= "form-control isNumeric" placeholder = "Enter value" style="width:100%;margin:auto;text-align:center;font-size:12px" name="real_amount[]" >							
+								<?php endif; ?>
+									<?php if($item_id == null){
+										$item_id = '';
+										} ?>
 										<input type="hidden" value="<?= $item_id ?>" name="item_id[]">
-									<?php endif; ?>
 								</td>
 							</tr>
 							<?php $total = $total + (float)$r['F65'] ?>
@@ -125,10 +134,12 @@
 								<span class = "glyphicon glyphicon-arrow-right copyToInput" style="padding:5px;color:white;background:#f0ad4e;border-radius:3px;float:right;cursor:pointer"></span></td>
 								<?php endif; ?>
 								<td style="width:10%;" class = "inputLocation">
+								<?php if($value) : ?>
 									<input type="text" class= "form-control isNumeric" placeholder = "0" style="width:100%;margin:auto;text-align:center;font-size:12px" name="real_amount[]" value = "<?= number_format($value,2,".","") ?>" >							
-									<?php if($item_id != null) : ?>
-										<input type="hidden" value="<?= $item_id ?>" name="item_id[]">
-									<?php endif; ?>
+								<?php else : ?>
+									<input type="text" class= "form-control isNumeric" placeholder = "0" style="width:100%;margin:auto;text-align:center;font-size:12px" name="real_amount[]" >							
+								<?php endif; ?>
+									<input type="hidden" value="<?= $item_id ?>" name="item_id[]">
 								</td>
 							</tr>
 							<?php $total = $total + (float)$r['F65'] ?>

@@ -59,6 +59,13 @@ class lboss{
 		return $result->fetch(PDO::FETCH_BOTH);
 	}
 
+	public function deleteItem($id)
+	{
+		$SQL = "DELETE FROM dbo.items 
+				WHERE id = ".$id;
+		$this->db->query($SQL);
+	}
+
 	public function updateItem($id, $real_amount)
 	{
 		$update = "UPDATE items SET real_amount =" . $real_amount . " WHERE id =" . $id;
